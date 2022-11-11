@@ -107,14 +107,13 @@ app.post('/post/add', (req, res) => {
     let createdAt = req.body.createdAt;
     let updateAt = req.body.updateAt;
     let authorId = req.body.authorId;
-    let tag = req.body.tag;
 
     //validate the data
     if (!bccode || !bcname) {
         return res.status(400).send({ error: true, message: "Please provide both name and author" });
     } else {
-        con.query('INSERT INTO site_cartran (title, content, contentHtml, hidden, createdAt, updateAt, authorId, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [title, content, contentHtml, hidden, createdAt, updateAt, authorId, tag],
+        con.query('INSERT INTO site_cartran (title, content, contentHtml, hidden, createdAt, updateAt, authorId) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [title, content, contentHtml, hidden, createdAt, updateAt, authorId],
             (err, result, fields) => {
                 if (err) throw err;
                 return res.send({ error: false, data: result, message: "Record added" });
