@@ -105,15 +105,15 @@ app.post('/post/add', (req, res) => {
     let contentHtml = req.body.contentHtml;
     let hidden = req.body.hidden;
     let createdAt = req.body.createdAt;
-    let updateAt = req.body.updateAt;
+    let updatedAt = req.body.updatedAt;
     let authorId = req.body.authorId;
 
     //validate the data
     if (!title || !content) {
         return res.status(400).send({ error: true, message: "Please provide both name and author" });
     } else {
-        con.query('INSERT INTO Post2 (title, content, contentHtml, hidden, createdAt, updateAt, authorId) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [title, content, contentHtml, hidden, createdAt, updateAt, authorId],
+        con.query('INSERT INTO Post2 (title, content, contentHtml, hidden, createdAt, updatedAt, authorId) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [title, content, contentHtml, hidden, createdAt, updatedAt, authorId],
             (err, result, fields) => {
                 if (err) throw err;
                 return res.send({ error: false, data: result, message: "Record added" });
