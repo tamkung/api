@@ -17,19 +17,13 @@ app.get('/', (req, res) => {
 })
 
 var con = mysql.createConnection({
+
     host: "ap-southeast.connect.psdb.cloud",
-    //port: 3306,
     user: "315tbrkooe37c1c3ih5b",
     password: "pscale_pw_fpzwYnqTEK38acUZFp0thOIBDTcgeKWmFOYRXIGpHUr",
     database: "test",
-    ssl:{}
+    ssl: {}
 
-    //host: "localhost",
-    //port: 3306,
-    //user: "root",
-    //password: "Cpac@2022",
-    //database: "bes",
-    
 });
 
 con.connect(function (err) {
@@ -81,6 +75,46 @@ app.post('/Smart_Bes_iSupply/sitecar', (req, res) => {
     } else {
         con.query('INSERT INTO site_cartran (BCCODE, BCNAME, HBCODE, HBCNAME, trannumber, CustomerCode, CustomerName, S_address, u_date, type_tran, duldates, trnote01, trnote02, trnote03, plantnote01, plantnote02, trupcustomer01, dp_note01, dp_note02, dp_note03, dp_note04) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )',
             [bccode, bcname, hbcode, hbcname, trannumber, customerCode, customerName, s_address, u_date, type_tran, duldates, trnote01, trnote02, trnote03, plantnnote01, plantnnote02, trupcustomer01, dp_note01, dp_note02, dp_note03, dp_note04],
+            (err, result, fields) => {
+                if (err) throw err;
+                return res.send({ error: false, data: result, message: "Record added" });
+            }
+        )
+    }
+})
+
+//---------------------------------------------------Post----------------------------
+app.get('/getpost', (req, res) => {
+
+    con.query('SELECT * FROM Post', (err, rows, fields) => {
+        if (err) throw err;
+
+        let message = "";
+        if (rows === undefined || rows.length === 0) {
+            message = "No records found";
+        } else {
+            message = "Records found";
+        }
+        return res.send({ error: false, data: rows, message: message });
+    })
+})
+
+app.post('/post/add', (req, res) => {
+    let title = req.body.title;
+    let content = req.body.content;
+    let contentHtml = req.body.contentHtml;
+    let hidden = req.body.hidden;
+    let createdAt = req.body.createdAt;
+    let updateAt = req.body.updateAt;
+    let authorId = req.body.authorId;
+    let tag = req.body.tag;
+
+    //validate the data
+    if (!bccode || !bcname) {
+        return res.status(400).send({ error: true, message: "Please provide both name and author" });
+    } else {
+        con.query('INSERT INTO site_cartran (title, content, contentHtml, hidden, createdAt, updateAt, authorId, tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [title, content, contentHtml, hidden, createdAt, updateAt, authorId, tag],
             (err, result, fields) => {
                 if (err) throw err;
                 return res.send({ error: false, data: result, message: "Record added" });
