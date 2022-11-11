@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
         message: "Hello World!!",
         written_by: "TWT",
         published_on: "11/11/2022",
+        date: new Date(),
     })
 })
 
