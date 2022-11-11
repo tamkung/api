@@ -86,7 +86,7 @@ app.post('/Smart_Bes_iSupply/sitecar', (req, res) => {
 //---------------------------------------------------Post----------------------------
 app.get('/getpost', (req, res) => {
 
-    con.query('SELECT * FROM Post', (err, rows, fields) => {
+    con.query('SELECT * FROM Post2', (err, rows, fields) => {
         if (err) throw err;
 
         let message = "";
