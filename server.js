@@ -10,9 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     return res.send({
         error: false,
-        message: "Hello World",
-        written_by: "SmartScale",
-        published_on: "11/07/2022",
+        message: "Hello World!!",
+        written_by: "TWT",
+        published_on: "11/11/2022",
     })
 })
 
