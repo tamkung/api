@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
         error: false,
         message: "Hello World!!",
         written_by: "TWT",
-        published_on: "11/11/2022",
-        date: new Date(),
+        published_on: "11/11/2565",
+        currentDate: new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }),
     })
 })
 
