@@ -99,7 +99,7 @@ app.get('/getpost', (req, res) => {
     })
 })
 
-app.post('/post/add', (req, res) => {
+app.post('/add/post', (req, res) => {
     let title = req.body.title;
     let content = req.body.content;
     let contentHtml = req.body.contentHtml;
